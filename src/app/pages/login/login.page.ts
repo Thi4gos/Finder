@@ -1,20 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  styleUrls: ['./login.page.scss'],
+  imports: [IonicModule, CommonModule, FormsModule]  // Aqui importamos o módulo do Ionic
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  onLogin() {
+    console.log('Tentativa de login');
   }
 
+  loginWithGoogle() {
+    // Lógica de autenticação com o Google aqui
+    console.log('Login com Google');
+  }
+  ionViewDidEnter() {
+    // Forçar a detecção de mudanças
+    this.cdr.detectChanges();
+  }
 }

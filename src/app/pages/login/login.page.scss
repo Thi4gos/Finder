@@ -1,0 +1,25 @@
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  ion-item {
+    margin-bottom: 15px;
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
+  ion-input.custom {
+    --border-color: white;
+    --background: white;
+    --borde-radius: 1em;
+  }
+}

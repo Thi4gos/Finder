@@ -18,4 +18,8 @@ export const routes: Routes = [
     path: 'preferences',
     loadComponent: () => import('./pages/preferences/preferences.page').then( m => m.PreferencesPage)
   },
+  {
+    path: 'registry',
+    loadComponent: () => import('./pages/registry/registry.page').then( m => m.RegistryPage)
+  },
 ];

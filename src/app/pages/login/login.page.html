@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onLogin">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6" class="ion-text-center">
+          <!-- Imagem de login (substitua o caminho da imagem pela sua) -->
+          <img src="../../../assets/img/logoTypes/PNG/Logo-removebg-preview.png" alt="Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
+          <!-- Input de Login/Email -->
+          <ion-item>
+            <ion-input class="custom" label="Email" labelPlacement="floating" type="text" placeholder="Digite seu email ou login"></ion-input>
+          </ion-item>
+          <!-- Input de Senha -->
+          <ion-item>
+            <ion-input class="custom" label="Senha" labelPlacement="floating" type="password" placeholder="Digite sua senha"></ion-input>
+          </ion-item>
+          <!-- Botão de Login -->
+          <ion-button expand="block" shape="round" style="margin-top: 20px;">Entrar</ion-button>
+          <!-- Pergunta de Registro -->
+          <p style="margin-top: 15px;">
+            Ainda não tem uma conta? <a href="registry">Cadastre-se</a>
+          </p>
+          <!-- Login com Google -->
+          <ion-button expand="block" shape="round" color="danger" style="margin-top: 20px;">
+            <ion-icon name="logo-google" slot="start"></ion-icon> Entrar com Google
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
