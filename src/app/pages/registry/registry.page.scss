@@ -1,0 +1,58 @@
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  ion-item {
+    margin-bottom: 15px;
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
+  .buttonRg{
+    display: flex;
+    flex-direction: row;    
+    align-items: center;
+    justify-content: space-between; 
+    ion-button{
+        margin: 0
+    }
+    p {
+      text-align: right;  
+    }
+  }
+  .CheckBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 1em;
+  }
+  ion-input.custom {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --border-color: white;
+    
+    --highlight-color-focused: #ffffff; /* Cor da borda inferior quando focado */
+    --color: white; /* Cor do texto */
+    --placeholder-color: rgba(255, 255, 255, 0.7); /* Cor do placeholder */
+    --background: transparent; /* Torna o fundo transparente */
+  }
+
+  /* Adiciona um efeito de linha inferior no input */
+  ion-item {
+    --highlight-color-focused: #ffffff; /* Cor da borda inferior quando focado */
+    --inner-padding-bottom: 0; /* Remove padding inferior extra */
+    border-bottom: 2px solid white; /* Borda inferior branca */
+    border-radius: 1em;
+  }
+}
+

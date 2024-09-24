@@ -2,7 +2,6 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,7 +11,9 @@ import { IonicModule } from '@ionic/angular';
 })
 export class LoginPage {
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+    
+  }
 
   onLogin() {
     console.log('Tentativa de login');

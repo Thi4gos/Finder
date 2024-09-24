@@ -1,23 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonItem, IonInput } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-registry',
   templateUrl: './registry.page.html',
   styleUrls: ['./registry.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonItem, IonInput, CommonModule, FormsModule]
+  imports: [IonicModule, FormsModule, CommonModule]
 })
 export class RegistryPage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private cdr: ChangeDetectorRef) { }
 
-
+  onRegister(){
+    console.log("Vish");
+  }
   backToLogin(){
     this.navCtrl.back();
+  }
+  ionViewDidEnter() {
+    // Forçar a detecção de mudanças
+    this.cdr.detectChanges();
   }
   ngOnInit() {
   }

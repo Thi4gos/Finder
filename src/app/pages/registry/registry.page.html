@@ -1,13 +1,54 @@
-<ion-content [fullscreen]="true">
-  <ion-item>
-    <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Finder-removebg-preview">
-  </ion-item>
-  <form action="">
-    <ion-item>
-      <ion-input label="Insira um E-mail" labelPlacement="floating" placeholder="*******@gmail.com"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Insira sua senha" labelPlacement="floating" placeholder="*******"></ion-input>
-    </ion-item>
+<ion-content class="ion-padding custom">
+  <!-- Imagem no topo -->
+  <div class="ion-text-center">
+    <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
+  </div>
+
+  <form (ngSubmit)="onRegister()">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6">
+          <!-- Input Nome -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Nome" type="text" placeholder="Digite seu nome" required></ion-input>
+          </ion-item>
+
+          <!-- Input Email -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Email" type="email" placeholder="Digite seu email" required></ion-input>
+          </ion-item>
+
+          <!-- Input Senha -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Senha" type="password" placeholder="Digite sua senha" required></ion-input>
+          </ion-item>
+
+          <!-- Input Confirmar Senha -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Confirmar senha" type="password" placeholder="Digite novamente sua senha" required></ion-input>
+          </ion-item>
+
+          <!-- Input Telefone (Opcional) -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" placeholder="Digite seu telefone"></ion-input>
+          </ion-item>
+          <!-- Botão de Registro -->
+          <div class="buttonRg">
+            <ion-button expand="fit" shape="round" type="submit">
+              Registrar
+            </ion-button>
+            <!-- Pergunta sobre login -->
+            <p style="margin-top: 15px;" class="ion-text-center">
+              Já tem uma conta? <a href="/login">Faça login</a>
+            </p>
+          </div>
+          <!-- Checkbox para aceitar termos -->
+          <div class="CheckBox">     
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Eu aceito os <a href="#">termos de uso</a></ion-label> 
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>

@@ -17,9 +17,32 @@ ion-content {
   ion-button {
     margin-top: 20px;
   }
+  .buttonRg{
+    display: flex;
+    flex-direction: row;    
+    justify-content: space-between; 
+    p {
+      text-align: right;  
+    }
+  }
+
   ion-input.custom {
+    --padding-start: 10px;
+    --padding-end: 10px;
     --border-color: white;
-    --background: white;
-    --borde-radius: 1em;
+    
+    --highlight-color-focused: #ffffff; /* Cor da borda inferior quando focado */
+    --color: white; /* Cor do texto */
+    --placeholder-color: rgba(255, 255, 255, 0.7); /* Cor do placeholder */
+    --background: transparent; /* Torna o fundo transparente */
+  }
+
+  /* Adiciona um efeito de linha inferior no input */
+  ion-item {
+    --highlight-color-focused: #ffffff; /* Cor da borda inferior quando focado */
+    --inner-padding-bottom: 0; /* Remove padding inferior extra */
+    border-bottom: 2px solid white; /* Borda inferior branca */
+    border-radius: 1em;
   }
 }
+
