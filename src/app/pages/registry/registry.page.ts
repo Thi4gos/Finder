@@ -11,9 +11,13 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, FormsModule, CommonModule]
 })
-export class RegistryPage implements OnInit {
+export class RegistryPage {
 
   constructor(private navCtrl: NavController, private cdr: ChangeDetectorRef) { }
+  
+  backPage() {
+    history.back()
+  }
 
   onRegister(){
     console.log("Vish");
@@ -24,8 +28,5 @@ export class RegistryPage implements OnInit {
   ionViewDidEnter() {
     // Forçar a detecção de mudanças
     this.cdr.detectChanges();
-  }
-  ngOnInit() {
-  }
-
+  };
 }

@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
@@ -7,6 +8,11 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   standalone: true,
   imports: [IonApp, IonRouterOutlet],
 })
+
 export class AppComponent {
   constructor() {}
 }
+
+//Apresentação de começo de uso
+//AVA Formadora
+//
