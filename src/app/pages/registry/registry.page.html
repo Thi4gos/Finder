@@ -4,15 +4,28 @@
     <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
   </div>
 
-  <form (ngSubmit)="onRegister()">
+  <form (ngSubmit)="onRegister()"> <!-- LÓGICA -->
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size="12" size-md="6">
+          <!-- TENTEM COLOCAR O GRADIENT NO FUNDO-->
           <!-- Input Nome -->
           <ion-item>
-            <ion-input labelPlacement="floating" label="Nome" type="text" placeholder="Digite seu nome" required></ion-input>
+            <ion-input labelPlacement="floating" label="Nome" type="text" placeholder="Digite seu primeiro nome" required></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Sobrenome" type="text" placeholder="Digite seu sobrenome" required></ion-input>
+          </ion-item>
+
+          <!-- Input Telefone (Opcional) -->
+          <ion-item>
+            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" placeholder="Digite seu telefone"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input labelPlacement="stacked" label="Data de nascimento" type="date" required></ion-input>
+          </ion-item>
           <!-- Input Email -->
           <ion-item>
             <ion-input labelPlacement="floating" label="Email" type="email" placeholder="Digite seu email" required></ion-input>
@@ -28,10 +41,7 @@
             <ion-input labelPlacement="floating" label="Confirmar senha" type="password" placeholder="Digite novamente sua senha" required></ion-input>
           </ion-item>
 
-          <!-- Input Telefone (Opcional) -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" placeholder="Digite seu telefone"></ion-input>
-          </ion-item>
+          
           <!-- Botão de Registro -->
           <div class="buttonRg">
             <a href="/preferences">Registrar</a>

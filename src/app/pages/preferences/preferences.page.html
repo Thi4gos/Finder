@@ -1,91 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Preferências de Usuário</ion-title>
+    <ion-title class="custom">Seja bem vindo ((name))</ion-title>
+    <p>Aqui você definirá suas freferencias para que já possamos fazer boas recomendações</p>
+    <p>Escolha abaixo o que você mais gosta de assitir:</p>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <form (ngSubmit)="savePreferences()">
-    
-    <!-- Categoria de Filmes -->
-    <ion-list>
-      <ion-list-header>
-        <ion-label>Categorias de Filmes</ion-label>
-      </ion-list-header>
+  <form (ngSubmit)="savePreferences()"> <!-- COLOCAR SERVICE -->
 
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.actionMovies" name="actionMovies"></ion-checkbox>
-        <ion-label>Ação</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.comedyMovies" name="comedyMovies"></ion-checkbox>
-        <ion-label>Comédia</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.dramaMovies" name="dramaMovies"></ion-checkbox>
-        <ion-label>Drama</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.horrorMovies" name="horrorMovies"></ion-checkbox>
-        <ion-label>Terror</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.sciFiMovies" name="sciFiMovies"></ion-checkbox>
-        <ion-label>Ficção Científica</ion-label>
-      </ion-item>
-
-    </ion-list>
-
-    <!-- Categoria de Séries -->
-    <ion-list>
-      <ion-list-header>
-        <ion-label>Categorias de Séries</ion-label>
-      </ion-list-header>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.actionSeries" name="actionSeries"></ion-checkbox>
-        <ion-label>Ação</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.comedySeries" name="comedySeries"></ion-checkbox>
-        <ion-label>Comédia</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.dramaSeries" name="dramaSeries"></ion-checkbox>
-        <ion-label>Drama</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.horrorSeries" name="horrorSeries"></ion-checkbox>
-        <ion-label>Terror</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="preferences.sciFiSeries" name="sciFiSeries"></ion-checkbox>
-        <ion-label>Ficção Científica</ion-label>
-      </ion-item>
-
-    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+           <ion-checkbox></ion-checkbox> <!-- ESTILIZAR ISSO -->
+           <ion-label>Ação</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-checkbox></ion-checkbox> <!-- ESTILIZAR ISSO -->
+          <ion-label>Aventura</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-checkbox></ion-checkbox> <!-- ESTILIZAR ISSO -->
+          <ion-label>Terror</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <!-- Opção de Notificações -->
     <ion-list>
       <ion-list-header>
-        <ion-label>Preferências de Notificações</ion-label>
+        <ion-label>Preferências de Notificações</ion-label> <!-- LÓGICA -->
       </ion-list-header>
 
       <ion-item>
-        <ion-label>Receber notificações de novos lançamentos</ion-label>
+        <ion-label>Receber notificações de novos lançamentos</ion-label> <!-- LÓGICA -->
         <ion-toggle slot="end" [(ngModel)]="preferences.newReleases" name="newReleases"></ion-toggle>
       </ion-item>
 
       <ion-item>
-        <ion-label>Receber recomendações baseadas no histórico</ion-label>
+        <ion-label>Receber recomendações baseadas no histórico</ion-label> <!-- LÓGICA -->
         <ion-toggle slot="end" [(ngModel)]="preferences.recommendations" name="recommendations"></ion-toggle>
       </ion-item>
     </ion-list>
@@ -93,7 +46,8 @@
     <!-- Preferência de Idiomas -->
     <ion-list>
       <ion-list-header>
-        <ion-label>Preferência de Idioma</ion-label>
+        <ion-label>Preferência de Idioma</ion-label> <!-- LÓGICA -->
+                    <!-- MUDAR FORMA DE ESCOLHA (MAIS DE UM IDIOMA) -->
       </ion-list-header>
 
       <ion-item>
@@ -102,10 +56,10 @@
           <ion-select-option value="portuguese">Português</ion-select-option>
           <ion-select-option value="english">Inglês</ion-select-option>
           <ion-select-option value="spanish">Espanhol</ion-select-option>
-        </ion-select>
+        </ion-select>  <!-- MUDAR FORMA DE ESCOLHA (MAIS DE UM IDIOMA) -->
       </ion-item>
     </ion-list>
 
     <ion-button expand="block" type="submit" shape="round">Salvar Preferências</ion-button>
-  </form>
+  </form>                                                    <!-- LÓGICA -->
 </ion-content>
