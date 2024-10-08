@@ -11,37 +11,33 @@
           <!-- TENTEM COLOCAR O GRADIENT NO FUNDO-->
           <!-- Input Nome -->
           <ion-item>
-            <ion-input labelPlacement="floating" label="Nome" type="text" placeholder="Digite seu primeiro nome" required></ion-input>
+            <ion-input labelPlacement="floating" label="Nome" type="text" [(ngModel)]="name" [ngModelOptions]={standalone:true} placeholder="Digite seu primeiro nome" required></ion-input>
           </ion-item>
-
           <ion-item>
-            <ion-input labelPlacement="floating" label="Sobrenome" type="text" placeholder="Digite seu sobrenome" required></ion-input>
+            <ion-input labelPlacement="floating" label="Sobrenome" type="text" [(ngModel)]="lastName" [ngModelOptions]={standalone:true} placeholder="Digite seu sobrenome" required></ion-input>
           </ion-item>
-
           <!-- Input Telefone (Opcional) -->
           <ion-item>
-            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" placeholder="Digite seu telefone"></ion-input>
+            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" [(ngModel)]="tel" [ngModelOptions]={standalone:true} placeholder="Digite seu telefone"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input labelPlacement="stacked" label="Data de nascimento" type="date" required></ion-input>
+            <ion-input labelPlacement="stacked" label="Data de nascimento" type="date" [(ngModel)]="bdate" [ngModelOptions]={standalone:true} required></ion-input>
           </ion-item>
           <!-- Input Email -->
           <ion-item>
-            <ion-input labelPlacement="floating" label="Email" type="email" placeholder="Digite seu email" required></ion-input>
+            <ion-input labelPlacement="floating" label="Email" type="email" [(ngModel)]="email" [ngModelOptions]={standalone:true} placeholder="Digite seu email" required></ion-input>
           </ion-item>
 
           <!-- Input Senha -->
           <ion-item>
-            <ion-input labelPlacement="floating" label="Senha" type="password" placeholder="Digite sua senha" required></ion-input>
+            <ion-input labelPlacement="floating" label="Senha" type="password" [(ngModel)]="pass" [ngModelOptions]={standalone:true} placeholder="Digite sua senha" required></ion-input>
           </ion-item>
 
           <!-- Input Confirmar Senha -->
           <ion-item>
             <ion-input labelPlacement="floating" label="Confirmar senha" type="password" placeholder="Digite novamente sua senha" required></ion-input>
-          </ion-item>
-
-          
+          </ion-item>      
           <!-- Botão de Registro -->
           <div class="buttonRg">
             <a href="/preferences">Registrar</a>
@@ -52,7 +48,6 @@
             <p style="margin-top: 15px;" class="ion-text-center">
               Já tem uma conta? <a href="/login">Faça login</a>
             </p>
-            <button type="button"(click)="backPage()">Voltar</button>
           </div>
           <!-- Checkbox para aceitar termos -->
           <div class="CheckBox">     
