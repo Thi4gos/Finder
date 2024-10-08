@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
+import { ConectDBService } from 'src/app/services/conect-db.service';
 
 @Component({
   selector: 'app-registry',
@@ -13,7 +14,7 @@ import { IonicModule } from '@ionic/angular';
 })
 export class RegistryPage {
 
-  constructor(private navCtrl: NavController, private cdr: ChangeDetectorRef) { }
+  constructor(private navCtrl: NavController, private cdr: ChangeDetectorRef, private conectdbservice:ConectDBService) { }
   
   backPage() {
     history.back()

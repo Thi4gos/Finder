@@ -7,11 +7,28 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        id 'com.android.application' version '7.2.0' apply false
+        // Add the dependency for the Google services Gradle plugin
+        id 'com.google.gms.google-services' version '4.3.15' apply false
         classpath 'com.android.tools.build:gradle:8.2.1'
         classpath 'com.google.gms:google-services:4.4.0'
-        id 'com.google.gms.google-services' version '4.4.2' apply false
+        
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        // Import the BoM for the Firebase platform
+
+        // Import the Firebase BoM
+        // When using the BoM, you don't specify versions in Firebase library dependencies
+        // Add the dependency for the Firebase SDK for Google Analytics
+        // TODO: Add the dependencies for any other Firebase products you want to use
+        // See https://firebase.google.com/docs/android/setup#available-libraries
+        // For example, add the dependencies for Firebase Authentication and Cloud Firestore
+        // Declare the dependency for the Cloud Firestore library
+        implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+        implementation("com.google.firebase:firebase-analytics")
+        implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+        implementation("com.google.firebase:firebase-auth")
+        implementation("com.google.firebase:firebase-firestore")
     }
 }
 
