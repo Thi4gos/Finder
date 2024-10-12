@@ -1,0 +1,102 @@
+.profile-picture-container {
+    width: 100px; // Ajuste a largura conforme necessário
+    height: 100px; // Ajuste a altura conforme necessário
+    display: flex; // Flexbox para centralização
+    justify-content: center; // Centraliza o conteúdo horizontalmente
+    align-items: center; // Centraliza o conteúdo verticalmente
+    border-radius: 50%; // Para um efeito circular
+    overflow: hidden; // Para esconder partes que saem do contêiner
+    margin: 0 auto; // Centraliza o contêiner no card
+
+    img {
+        width: 100%; // Imagem ocupa 100% do contêiner
+        height: auto; // Mantém a proporção da imagem
+    }
+
+    &.red-background {
+        background-color: red; // Cor de fundo vermelha
+        color: white; // Texto em branco se necessário
+        display: flex; // Flexbox para centralização
+        justify-content: center; // Centraliza o conteúdo horizontalmente
+        align-items: center; // Centraliza o conteúdo verticalmente
+        font-size: 1.5em; // Tamanho da fonte para o texto
+        font-weight: bold; // Deixa o texto mais destacado
+    }
+}
+
+.profile-picture {
+    width: 100px; // Tamanho da imagem
+    height: 100px; // Tamanho da imagem
+    border-radius: 50%; // Torna a imagem circular
+    border: 3px solid #e0e0e0; // Borda da imagem
+    transition: transform 0.3s; // Transição suave para hover
+}
+
+.profile-picture:hover {
+    transform: scale(1.05); // Aumenta levemente ao passar o mouse
+}
+
+ion-card {
+    --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2); // Sombra suave no card
+    border-radius: 10px; // Bordas arredondadas para o card
+    margin: 10px; // Espaçamento entre os cards
+}
+
+ion-item {
+    margin: 10px 0; // Espaçamento entre os itens
+}
+
+ion-input {
+    border-radius: 5px; // Bordas arredondadas para os inputs
+    --padding-start: 10px; // Espaço interno à esquerda
+}
+
+ion-button {
+    transition: background-color 0.3s, transform 0.3s; // Transições suaves para botões
+}
+
+ion-button:hover {
+    background-color: #0056b3; // Cor mais escura ao passar o mouse
+    transform: translateY(-2px); // Eleva o botão levemente
+}
+
+ion-card-content {
+    padding: 15px; // Aumenta o espaço interno do card
+}
+
+@media (max-width: 600px) {
+    .profile-picture {
+        width: 80px; // Tamanho menor em telas pequenas
+        height: 80px; // Tamanho menor em telas pequenas
+    }
+
+    ion-card {
+        margin: 5px; // Reduz o espaço em telas menores
+    }
+}
+
+.loading {
+    display: flex; // Flexbox para centralização do carregamento
+    justify-content: center; // Centraliza o conteúdo horizontalmente
+    align-items: center; // Centraliza o conteúdo verticalmente
+    height: 100%; // Altura total do contêiner
+}
+
+.spinner {
+    width: 30px; // Tamanho do spinner
+    height: 30px; // Tamanho do spinner
+    border: 4px solid rgba(255, 255, 255, 0.3); // Cor da borda
+    border-top: 4px solid #ff0000; // Cor do topo da borda
+    border-radius: 50%; // Faz o spinner ser redondo
+    animation: spin 1s linear infinite; // Animação de rotação
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg); // Rotação inicial
+    }
+
+    100% {
+        transform: rotate(360deg); // Rotação final
+    }
+}

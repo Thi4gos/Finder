@@ -2,20 +2,10 @@
   <ion-toolbar>
     <ion-title>
       <p>Blank</p>
-      <a href="login">Login</a>
+      <ion-button (click)="loginPage()">Login</ion-button>
+      <ion-button (click)="RegistryPage()">Registry</ion-button>
+      <ion-button (click)="ProfilePage()">Profile</ion-button>
+      <ion-button (click)="PreferencesPage()">P</ion-button>
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>

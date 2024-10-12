@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="login-container"> <!-- Contêiner principal para o formulário de login -->
+    <ion-card> <!-- Cartão que contém o formulário -->
+      <ion-card-header>
+        <ion-card-title>
+          <img src="assets/logo.png" alt="Logo do Aplicativo" class="app-logo" /> <!-- Logo da aplicação -->
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (ngSubmit)="login()"> <!-- Formulário com evento de submissão -->
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" required></ion-input> <!-- Campo para o email, obrigatório -->
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input type="password" required></ion-input> <!-- Campo para a senha, obrigatório -->
+          </ion-item>
+
+          <!-- Botão de login -->
+          <ion-button expand="full" color="primary" type="submit">Entrar</ion-button>
+          <!-- Botão de login com Google -->
+          <ion-button expand="full" color="light" (click)="loginWithGoogle()">Logar com Google</ion-button>
+        </form>
+
+        <div class="login-links"> <!-- Links para navegação -->
+          <ion-button fill="clear" routerLink="/signup">Não tem conta? Cadastre-se</ion-button>
+          <!-- Link para página de cadastro -->
+          <p><a [routerLink]="['/esqueceu-senha']">Esqueceu a Senha?</a></p> <!-- Link para recuperação de senha -->
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

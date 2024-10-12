@@ -1,8 +1,9 @@
-import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ConectDBService } from 'src/app/services/conect-db.service';
+import { NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,22 @@ import { ConectDBService } from 'src/app/services/conect-db.service';
   imports: [IonicModule, CommonModule, FormsModule]  // Aqui importamos o módulo do Ionic
 })
 export class LoginPage {
-  
-  constructor(private cdr: ChangeDetectorRef, private conectDBService:ConectDBService) {
-    
-  }
+  email: string = '';
+  pass: string = '';
 
+  constructor(private authService: AuthService, private navcontroller: NavController) {}
+
+  // Método de login com email e senha
   onLogin() {
-
+    if (this.email && this.pass) {
+      this.authService.login(this.email, this.pass);
+    } else {
+      console.error('Email e senha são necessários');
+    }
   }
 
+  // Método de login com Google
   loginWithGoogle() {
-    // Lógica de autenticação com o Google aqui
-    console.log('Login com Google');
-  }
-  ionViewDidEnter() {
-    // Forçar a detecção de mudanças
-    this.cdr.detectChanges();
+    this.authService.loginWithGoogle();
   }
 }

@@ -22,4 +22,12 @@ export const routes: Routes = [
     path: 'registry',
     loadComponent: () => import('./pages/registry/registry.page').then( m => m.RegistryPage)
   },
+  {
+    path: 'change-pass',
+    loadComponent: () => import('./pages/change-pass/change-pass.page').then( m => m.ChangePassPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
 ];

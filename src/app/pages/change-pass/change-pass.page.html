@@ -1,0 +1,13 @@
+<ion-content>
+  <!-- Container principal para a tela de redefinição de senha -->
+    <!-- Card que contém os elementos da tela de redefinição de senha -->
+      <!-- Logo do aplicativo -->
+      <img src="assets/logo.png" class="app-logo" />  
+        <!-- Campo de entrada para o email do usuário -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" required></ion-input> <!-- Entrada para email, obrigatória -->
+        </ion-item>
+        <!-- Botão para enviar o email de recuperação -->
+        <ion-button expand="full" color="primary" (click)="sendResetEmail()">Enviar</ion-button>
+</ion-content>

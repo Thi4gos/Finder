@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RegistryService } from 'src/app/services/registry.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registry',
@@ -20,7 +21,7 @@ export class RegistryPage {
   email: string = ''
   pass: string = ''
 
-  constructor(private registry:RegistryService) { }
+  constructor(private registry:RegistryService, private navcontroller: NavController) { }
   
   onRegister(){
     const user = {
@@ -28,8 +29,11 @@ export class RegistryPage {
       last: this.lastName,
       born: this.bdate, // Ou qualquer outro campo que você deseje enviar
       tel: this.tel,
-      email: this.email
+      email: this.email,
+      pass: this.pass
     };     
     this.registry.addUser(user)
+    var sucess: Promise<boolean> | void | Boolean = this.registry.defResult()
+    sucess = true ? this.navcontroller.navigateForward(['/preferences']) : console.log('Deu erro')
   }
 }
