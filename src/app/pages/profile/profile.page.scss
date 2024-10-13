@@ -1,0 +1,23 @@
+ion-avatar img,
+ion-avatar ion-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.profile {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .profileFoto {
+    display: flex;
+    margin: auto;
+    align-content: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    opacity: .5;
+    border-radius: 50%;
+  }
+  }

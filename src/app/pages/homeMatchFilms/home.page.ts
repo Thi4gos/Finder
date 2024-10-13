@@ -30,6 +30,9 @@ import { NavController } from '@ionic/angular';
   changePassPage(){
     this.navcontroller.navigateForward(['/change-pass'])
   }
+  FeedPage(){
+    this.navcontroller.navigateForward(['/feed'])
+  }
 
   
 }

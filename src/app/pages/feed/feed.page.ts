@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TmdbService } from 'src/app/services/tmdb.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
+  standalone: true,
+  imports: [IonicModule, FormsModule]
 })
 export class FeedPage implements OnInit {
   movies: any[] = [];
@@ -16,12 +21,12 @@ export class FeedPage implements OnInit {
   streamingProviders: { [key: number]: string[] } = {};
   additionalDetails: { [key: number]: any } = {}; // Detalhes adicionais dos filmes
   isLoading: boolean = false;
-
-  apiKey: string = 'dcd92f7ccc3440f8f78a90943580bf71';
-  apiUrl: string = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
-
-  constructor(private http: HttpClient, private router: Router) { }
-
+  apiKey = this.tmdb.apiKey
+  apiUrl = this.tmdb.apiUrl
+                          //MOVER REQUISIÇÕES PARA SERVICE
+                          //ADICIONAR ESTRUTURA NO BANCO PARA AVALIAÇÕES
+  constructor(private http: HttpClient, private router: Router, private tmdb: TmdbService) { }
+  
   ngOnInit() {
     this.getPopularMovies();
     this.getGenres(); // Carregar gêneros ao iniciar

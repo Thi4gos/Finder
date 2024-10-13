@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class TmdbService {
-  private apiKey: string = 'dcd92f7ccc3440f8f78a90943580bf71'; // Sua chave de API
-  private apiUrl: string = 'https://api.themoviedb.org/3';
+  apiKey: string = environment.tmdbApiKey; // Sua chave de API
+  apiUrl: string = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient) { }
 
