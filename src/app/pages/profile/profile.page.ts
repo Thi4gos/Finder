@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
-
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -13,10 +11,9 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ProfilePage {
-  
-  constructor(private router: Router) { }
+  constructor(private navcontroller: NavController) { }
   back(){ 
-    this.router.navigate(['feed'])
+    this.navcontroller.navigateForward(['feed'])
   }
   user = { //ADICIONAR ESTRUTURA DE USUÁRIO EXTRA AO BANCO(AVALIAÇÕES, FOTO DE PERFIL)
     profileImage: '',

@@ -4,9 +4,9 @@
       <img src="assets/logo.png" alt="Logo" class="logo"> <!-- Logo do aplicativo -->
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button routerLink="/perfil">Meu Perfil</ion-button>
-      <ion-button routerLink="/login">Acessar Login</ion-button>
-      <ion-button routerLink="/signup">Acessar Cadastro</ion-button>
+      <ion-button (click)="forProfile()">Meu Perfil</ion-button>
+      <ion-button (click)="forLogin()">Acessar Login</ion-button>
+      <ion-button (click)="forRegistry()">Acessar Cadastro</ion-button>
     </ion-buttons>
   </ion-toolbar>
 
