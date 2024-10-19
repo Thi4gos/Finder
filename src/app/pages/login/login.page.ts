@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,24 +10,22 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.page.html',
   standalone: true,
   styleUrls: ['./login.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule]  // Aqui importamos o módulo do Ionic
+  imports: [IonicModule, CommonModule, FormsModule] 
 })
 export class LoginPage {
   email: string = '';
   pass: string = '';
 
-  constructor(private authService: AuthService, private navcontroller: NavController) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  // Método de login com email e senha
   onLogin() {
     if (this.email && this.pass) {
       this.authService.login(this.email, this.pass);
     } else {
-      console.error('Email e senha são necessários');
+      console.error('Email e senha são necessários'); //TRATAR ERRO
     }
   }
 
-  // Método de login com Google
   loginWithGoogle() {
     this.authService.loginWithGoogle();
   }

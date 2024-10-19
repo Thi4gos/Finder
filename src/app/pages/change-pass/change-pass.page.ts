@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular'; 
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-pass',
@@ -13,10 +13,10 @@ import { NavController } from '@ionic/angular';
 })
 export class ChangePassPage {
   back(){ 
-    this.navcontroller.navigateBack(['home'])
+    this.router.navigate(['home'])
   }
-  constructor(private navcontroller: NavController) { }
+  constructor(private router: Router) { }
   sendResetEmail(){
-
+    
   }
 }

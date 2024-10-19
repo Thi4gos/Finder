@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { TmdbService } from 'src/app/services/tmdb.service';
 
 @Component({
@@ -23,8 +24,9 @@ export class FeedPage implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private navcontroller: NavController,
-    private tmdbService: TmdbService
+    private router: Router,
+    private tmdbService: TmdbService,
+    private toastcontroller: ToastController
   ) { }
 
   ngOnInit() {
@@ -33,18 +35,18 @@ export class FeedPage implements OnInit {
   }
 
   forProfile() {
-    this.navcontroller.navigateForward(['/profile']);
+    this.router.navigate(['/profile']);
   }
 
   forLogin() {
-    this.navcontroller.navigateForward(['/login']);
+    this.router.navigate(['/login']);
   }
 
   forRegistry() {
-    this.navcontroller.navigateForward(['/registry']);
+    this.router.navigate(['/registry']);
   }
 
-  // Método para buscar filmes populares via TmdbService
+  
   getPopularMovies() {
     this.isLoading = true;
     this.tmdbService.getPopularMovies().subscribe(
@@ -55,7 +57,7 @@ export class FeedPage implements OnInit {
         this.loadAdditionalMovieDetails();
       },
       error:(error) => {
-        console.error('Erro ao buscar filmes populares: ', error);
+        console.error('Erro ao buscar filmes populares: ', error); //TRATAR ERRO
         this.isLoading = false;
       }}
     );
@@ -68,13 +70,13 @@ export class FeedPage implements OnInit {
         this.genres = response.genres;
       },
       error:(error) => {
-        console.error('Erro ao buscar gêneros: ', error);
+        console.error('Erro ao buscar gêneros: ', error); //TRATAR ERRO
       }
     }
     );
   }
 
-  // Método para filtrar filmes por gênero
+  // FILTRO
   filterByGenre() {
     this.isLoading = true;
     if (this.selectedGenre) {
@@ -86,7 +88,7 @@ export class FeedPage implements OnInit {
           this.loadAdditionalMovieDetails();
         },
         error: (error) => {
-          console.error('Erro ao buscar filmes por gênero: ', error);
+          console.error('Erro ao buscar filmes por gênero: ', error); //TRATAR ERRO
           this.isLoading = false;
         }
       }
@@ -96,7 +98,7 @@ export class FeedPage implements OnInit {
     }
   }
 
-  // Carregar provedores de streaming
+  // PROVEDORES
   loadWatchProviders() {
     this.movies.forEach(movie => {
       const movieId = movie.id;
@@ -106,14 +108,13 @@ export class FeedPage implements OnInit {
           this.streamingProviders[movieId] = providers.map((provider: any) => provider.provider_name);
         },
         error: (error) => {
-          console.error('Erro ao buscar provedores de streaming: ', error);
+          console.error('Erro ao buscar provedores de streaming: ', error); //TRATAR ERRO
         }
       }
       );
     });
   }
 
-  // Carregar detalhes adicionais de cada filme
   loadAdditionalMovieDetails() {
     this.movies.forEach(movie => {
       const movieId = movie.id;
@@ -128,14 +129,14 @@ export class FeedPage implements OnInit {
           };
         },
         error: (error) => {
-          console.error('Erro ao buscar detalhes adicionais: ', error);
+          console.error('Erro ao buscar detalhes adicionais: ', error); //TRATAR ERRO
         }
       }
       );
     });
   }
 
-  // Método para buscar filmes pela barra de pesquisa
+  // BARRA DE PESQUISA
   searchMovies() {
     this.isLoading = true;
     if (this.searchTerm.trim() === '') {
@@ -149,7 +150,7 @@ export class FeedPage implements OnInit {
           this.loadAdditionalMovieDetails();
         },
         error:(error) => {
-          console.error('Erro ao buscar filmes: ', error);
+          console.error('Erro ao buscar filmes: ', error); //TRATAR ERRO
           this.isLoading = false;
         }
       }
@@ -175,7 +176,7 @@ export class FeedPage implements OnInit {
         }
       },                  
       error: (error) => {
-        console.error('Erro ao buscar trailer: ', error);
+        console.error('Erro ao buscar trailer: ', error); //TRATAR ERRO
         alert('Erro ao buscar trailer.');
       }
     }

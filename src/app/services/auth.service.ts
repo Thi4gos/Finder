@@ -8,19 +8,18 @@ import { Auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup }
 export class AuthService {
   constructor(private auth: Auth, private router: Router) {}
 
-  // Método de login com email e senha
+  // EMAIL/SENHA
   async login(email: string, password: string): Promise<void> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       console.log('Usuário logado:', userCredential.user);
       this.router.navigate(['/preferences'])
-      // Aqui você pode fazer algo após o login bem-sucedido, como navegar para outra página
     } catch (error) {
-      console.error('Erro no login:', error);
+      console.error('Erro no login:', error); //TRATAR ERRO
     }
   }
 
-  // Método de login com Google
+  // LOGIN GOOGLE
   async loginWithGoogle(): Promise<void> {
     try {
       const provider = new GoogleAuthProvider();
@@ -28,7 +27,7 @@ export class AuthService {
       console.log('Login com Google bem-sucedido:', userCredential.user);
       
     } catch (error) {
-      console.error('Erro no login com Google:', error);
+      console.error('Erro no login com Google:', error); //TRATAR ERRO
     }
   }
 }

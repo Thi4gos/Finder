@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TutorialVerif } from './tutorial-verif.service';
+import { ProfileService } from './profile.service';
 
-describe('TutorialverifServiceService', () => {
-  let service: TutorialVerif;
+describe('ProfileService', () => {
+  let service: ProfileService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TutorialVerif);
+    service = TestBed.inject(ProfileService);
   });
 
   it('should be created', () => {

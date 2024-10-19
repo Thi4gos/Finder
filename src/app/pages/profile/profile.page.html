@@ -3,74 +3,83 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="'/home'"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Perfil
-    </ion-title>
+    <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="toggleEdit()">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title [ngStyle]="{'text-align': 'center'}">{{user.firstName}}[Nome usuario]</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
-      <!-- Exibe a foto de perfil, com fundo vermelho se não houver imagem -->
-      <ion-item>
-        <div class="profile">
-          <!-- <ion-avatar>
-            <div [ngStyle]="{'background-image': user.profileImage ? 'url(' + user.profileImage + ')' : 'url(assets/imgs/default-avatar.png)'}"></div>
-          </ion-avatar>         -->
-          <div class="profileFoto">Foto de perfil</div>
-          <p>[Nome completo usuario]</p>
-          <ion-button>Editar perfil</ion-button>
+      <!-- Exibe a foto de perfil com as informações ao redor -->
+      <div class="profile-container">
+        <ion-avatar>
+          <div [ngStyle]="{'background-image': user.profileImage ? 'url(' + user.profileImage + ')' : 'url(assets/imgs/default-avatar.png)'}"></div>
+        </ion-avatar>
+        <div class="profile-info">
+          <ion-input [(ngModel)]="user.firstName" [readonly]="!isEditing" placeholder="Nome"></ion-input>
+          <ion-input [(ngModel)]="user.lastName" [readonly]="!isEditing" placeholder="Sobrenome"></ion-input>
+          <ion-input [(ngModel)]="user.birthDate" [readonly]="!isEditing" placeholder="Data de Nascimento"></ion-input>
         </div>
-      </ion-item>
-      
-      <!-- Campo para o nome do usuário -->
-      <!-- <ion-item>
-        <ion-label position="stacked">Nome</ion-label>
-        <ion-input [(ngModel)]="user.firstName" readonly></ion-input>
-      </ion-item>
-      Campo para o sobrenome do usuário -->
-      <!--<ion-item>
-        <ion-label position="stacked">Sobrenome</ion-label>
-        <ion-input [(ngModel)]="user.lastName" readonly></ion-input>
-      </ion-item> -->
-      <!-- Campo para a data de nascimento do usuário -->
-      <ion-item>
-        <ion-label position="stacked">Data de Nascimento</ion-label>
-        <ion-input [(ngModel)]="user.birthDate" readonly></ion-input>
-      </ion-item>
+      </div>
 
-      <!-- Input para o upload da foto de perfil -->
-      <ion-item>
-        <ion-label position="stacked">Foto de Perfil</ion-label>
-        <input type="file" (change)="onFileSelected()" accept="image/*" />
-      </ion-item>
-      <!-- Botão para remover a foto de perfil -->
-      <ion-button expand="full" color="medium" (click)="removeProfilePicture()">Remover Foto de Perfil</ion-button>
-
-      <!-- Botão para alterar a senha do usuário -->
-      <ion-button expand="full" color="secondary" (click)="changePassword()">Alterar Senha</ion-button>
+      <!-- Campo para upload de imagem de perfil (só aparece em modo de edição) -->
+      <div *ngIf="isEditing">
+        <ion-item>
+          <ion-label position="stacked">Foto de Perfil</ion-label>
+          <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+        </ion-item>
+        <ion-button expand="full" color="medium" (click)="removeProfilePicture()">Remover Foto de Perfil</ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Avaliações Feitas</ion-card-title>
+      <ion-card-title>Preferências</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <!-- Lista de avaliações feitas pelo usuário -->
-        <!-- <ion-item *ngFor="let review of user.reviews">
-          <ion-label>
-            <h2>{{ review.movieTitle }}</h2>
-            <p>Avaliação: {{ review.rating }} estrelas</p>
-            <p>{{ review.comment }}</p>
-          </ion-label>
-        </ion-item> -->
-      </ion-list>
+      <!-- Seção para gêneros favoritos -->
+      <ion-item>
+        <ion-label>Gêneros Favoritos</ion-label>
+        <ion-select [(ngModel)]="user.favoriteGenres" [ngIf]="!isEditing" multiple="true">
+          <ion-select-option value="action">Ação</ion-select-option>
+          <ion-select-option value="comedy">Comédia</ion-select-option>
+          <ion-select-option value="drama">Drama</ion-select-option>
+          <ion-select-option value="horror">Terror</ion-select-option>
+          <ion-select-option value="sci-fi">Ficção Científica</ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informações do Perfil</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Total de Avaliações</ion-label>
+        <ion-note>{{ user.totalReviews || 0 }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Média de Avaliações</ion-label>
+        <ion-note>{{ user.averageRating || 'N/A' }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data de Criação</ion-label>
+        <ion-note>{{ user.creationDate || 'N/A' }}</ion-note>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botões de ação (salvar ou cancelar edição) -->
+  <div *ngIf="isEditing">
+    <ion-button expand="full" color="success" (click)="saveProfile()">Salvar</ion-button>
+    <ion-button expand="full" color="danger" (click)="cancelEdit()">Cancelar</ion-button>
+  </div>
 </ion-content>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Firestore para gravar as preferências
+import { AngularFireAuth } from '@angular/fire/compat/auth'; // Firebase Auth
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular'
-
 
 @Component({
   selector: 'app-preferences',
@@ -12,7 +13,6 @@ import { IonicModule } from '@ionic/angular'
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class PreferencesPage {
-  // Modelo de preferências do usuário
   preferences = {
     actionMovies: false,
     comedyMovies: false,
@@ -29,11 +29,22 @@ export class PreferencesPage {
     language: 'portuguese'
   };
 
-  constructor() { }
+  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  // Função para salvar preferências
-  savePreferences() {
-    console.log('Preferências salvas:', this.preferences);
+  async savePreferences() {
+    try {
+      const user = await this.afAuth.currentUser; // USUÁRIO ATUAL
+      if (user) {
+        const uid = user.uid;
+        await this.afs.collection('users').doc(uid).set({
+          preferences: this.preferences
+        }, { merge: true }); // Usamos "merge: true" para atualizar sem sobrescrever tudo
+        // console.log('Preferências salvas com sucesso:', this.preferences);
+      } else {
+        console.error('Usuário não autenticado');
+      }
+    } catch (error) {
+      console.error('Erro ao salvar as preferências:', error); //TRATAR ERRO
+    }
   }
-
 }

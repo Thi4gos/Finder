@@ -9,12 +9,9 @@
       <ion-button (click)="forRegistry()">Acessar Cadastro</ion-button>
     </ion-buttons>
   </ion-toolbar>
-
   <ion-toolbar>
     <!-- Barra de pesquisa para buscar filmes -->
     <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchMovies()" placeholder="Buscar filmes"></ion-searchbar>
-
-    <!-- Filtro de gêneros -->
     <ion-select placeholder="Filtrar por Gênero" [(ngModel)]="selectedGenre" (ionChange)="filterByGenre()">
       <ion-select-option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</ion-select-option>
     </ion-select>

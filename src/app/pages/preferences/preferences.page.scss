@@ -1,14 +1,17 @@
-ion-title.custom {
-    margin: 1em 0 0 0;
-    text-align: center;    
+ion-item {
+  --background: #f5f5f5;
+  --border-radius: 10px;
+  margin-bottom: 10px;
 }
-.prefe {
-    text-align: center;
-    border-radius: 1em;
-    border: 2px solid white;
-    padding: .3em;
+
+ion-checkbox {
+  --background-checked: #3880ff;  // Cor do fundo quando marcado
+  --border-color-checked: #3880ff;  // Cor da borda quando marcado
+  --background: #e0e0e0;  // Cor do fundo quando desmarcado
+  --border-radius: 5px;   // Deixando o checkbox mais "quadrado"
 }
-p {
-    text-align: center;
-    }
-  
+
+ion-label {
+  font-weight: bold;
+  color: #333;
+}
