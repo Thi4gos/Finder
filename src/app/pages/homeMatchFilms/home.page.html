@@ -1,33 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      <p>Grupo Albany</p>
+      <h2>Carta de apresentação</h2>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!-- Renderiza as páginas de acordo com as rotas -->
-  <router-outlet>
-    <ion-item>
-      <ion-button (click)="loginPage()">Login</ion-button>
-      <ion-button (click)="registryPage()">Registry</ion-button>
-      <ion-button (click)="changePassPage()">Mudar senha</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="profilePage()">Profile</ion-button>
-      <ion-button (click)="preferencesPage()">Preferências</ion-button>
-      <ion-button (click)="feedPage()">Feed</ion-button>
-    </ion-item>
-  
-    <!-- Grupo -->
-    <ion-item>
-      <div>
-        <h3>Grupo Albany</h3>
-        <p>Thiago dos Santos</p>
-        <p>Gabriel Alves</p>
-        <p>Bruno Matheus</p>
-        <p>Daniel de Lima</p>
-      </div>
-    </ion-item>
-  </router-outlet>
+  <!-- Grupo -->
+  <ion-item>
+    <div>
+      <h2>Grupo Albany</h2>
+      <p>Thiago dos Santos</p>
+      <p>Gabriel Alves</p>
+      <p>Bruno Matheus</p>
+      <p>Daniel de Lima</p>
+    </div>
+  </ion-item>
+  <ion-item>
+    <p>Vamos para o principal?</p>
+    <ion-button (click)="goToFeed()">Feed</ion-button>
+  </ion-item>
 </ion-content>

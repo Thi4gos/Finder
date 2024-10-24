@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'; // Firestore 
 import { AngularFireAuth } from '@angular/fire/compat/auth'; // Firebase Auth
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular'
+import { IonicModule, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-preferences',
@@ -29,7 +29,7 @@ export class PreferencesPage {
     language: 'portuguese'
   };
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) { }
+  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private toastcontroller: ToastController) { }
 
   async savePreferences() {
     try {

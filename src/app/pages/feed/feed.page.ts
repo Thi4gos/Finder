@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { IonicModule,ToastController } from '@ionic/angular';
 import { TmdbService } from 'src/app/services/tmdb.service';
 
 @Component({

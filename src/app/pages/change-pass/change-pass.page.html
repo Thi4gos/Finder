@@ -6,12 +6,25 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-      <img src="assets/logo.png" class="app-logo" />  
-        <!-- Campo de entrada para o email do usuário -->
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" required></ion-input> <!-- Entrada para email, obrigatória -->
-        </ion-item>
-        <!-- Botão para enviar o email de recuperação -->
-        <ion-button expand="full" color="primary" (click)="sendResetEmail()">Enviar</ion-button>
+  <img src="assets/logo.png" class="app-logo" />  
+    <!-- Campo de entrada para o email do usuário -->
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" required></ion-input> <!-- Entrada para email, obrigatória -->
+    </ion-item>
+    <!-- Botão para enviar o email de recuperação -->
+  <ion-button expand="full" color="primary" (click)="sendResetEmail()">Enviar</ion-button>
+  <ion-item>
+    <ion-button (click)="loginPage()">Login</ion-button>
+    <ion-button (click)="registryPage()">Registry</ion-button>
+    <ion-button (click)="changePassPage()">Mudar senha</ion-button>
+    <a href="preferences">preferences</a>
+    <a href="registry">Registro</a>
+    <a href="change-pass">Mudar senha</a>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="profilePage()">Profile</ion-button>
+    <ion-button (click)="preferencesPage()">Preferências</ion-button>
+    <ion-button (click)="feedPage()">Feed</ion-button>
+  </ion-item>
 </ion-content>

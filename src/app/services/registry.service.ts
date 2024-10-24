@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { ConectDBService } from './conect-db.service';
+import { getAuth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistryService {
-  sucess: boolean = true;
-  constructor(private firestore: Firestore, private conectdbservice: ConectDBService) {}
+  constructor(private firestore: Firestore) {}
 
-  async addUser(user: { first: string, last: string, born: string, tel: string, email: string, pass: string }) {
+  async addUser(user: { first: string, last: string, born: string, tel: string, email: string, pass: string }): Promise<boolean> {
     try {
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, user.email, user.pass);
+
       const docRef = await addDoc(collection(this.firestore, "Usuarios"), user);
-      console.log("Document written with ID: ", docRef.id);
+      return true;
     } catch (e) {
-      this.sucess = false;
+      return false;
     }
-  }
-  async defResult(){
-    await this.addUser;
-    return this.sucess;
   }
 }
