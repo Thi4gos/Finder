@@ -8,20 +8,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/homeMatchFilms/home.module').then(m => m.HomePageModule),
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-  },
-  {
     path: 'preferences',
     loadChildren: () => import('./pages/preferences/preferences.module').then(m => m.PreferencesPageModule),
-  },
-  {
-    path: 'registry',
-    loadChildren: () => import('./pages/registry/registry.module').then(m => m.RegistryPageModule),
   },
   {
     path: 'change-pass',
@@ -33,7 +21,19 @@ const routes: Routes = [
   },
   {
     path: 'feed',
-    loadChildren: () => import('./pages/feed/feed.module').then(m => m.FeedPageModule),
+    loadChildren: () => import('./pages/feed/feed.module').then( m => m.FeedPageModule)
+  },
+  {
+    path: 'change-pass',
+    loadChildren: () => import('./pages/change-pass/change-pass.module').then( m => m.ChangePassPageModule)
+  },
+  {
+    path: 'registry',
+    loadChildren: () => import('./pages/registry/registry.module').then( m => m.RegistryPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
 ];
 

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { RegistryService } from 'src/app/services/registry.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service'; 
@@ -10,8 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
   selector: 'app-registry',
   templateUrl: './registry.page.html',
   styleUrls: ['./registry.page.scss'],
-  standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule]
 })
 export class RegistryPage {
 

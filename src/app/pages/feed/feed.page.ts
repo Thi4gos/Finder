@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule,ToastController } from '@ionic/angular';
 import { TmdbService } from 'src/app/services/tmdb.service';
-
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
-  standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule]
 })
 export class FeedPage implements OnInit {
   movies: any[] = [];

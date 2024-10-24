@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule, ToastController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  standalone: true,
   styleUrls: ['./login.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule] 
 })
 export class LoginPage {
   email: string = '';
