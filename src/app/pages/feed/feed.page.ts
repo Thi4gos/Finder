@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule,ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { TmdbService } from 'src/app/services/tmdb.service';
 @Component({
   selector: 'app-feed',

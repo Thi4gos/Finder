@@ -29,7 +29,7 @@ log.txt
 /out-tsc
 /bazel-out
 
-Node
+# Node
 /node_modules
 npm-debug.log
 yarn-error.log
@@ -68,5 +68,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-/src/environments/

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Firestore para gravar as preferências
-import { AngularFireAuth } from '@angular/fire/compat/auth'; // Firebase Auth
+import { AngularFirestore } from '@angular/fire/compat/firestore'; 
+import { AngularFireAuth } from '@angular/fire/compat/auth'; 
 import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
