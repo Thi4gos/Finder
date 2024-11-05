@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; 
-import { AngularFireAuth } from '@angular/fire/compat/auth'; 
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastController } from '@ionic/angular';
+import { User } from '../../models/interfaces'; // IMPORTA A INTERFACE
 
 @Component({
   selector: 'app-preferences',
@@ -9,7 +10,8 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./preferences.page.scss'],
 })
 export class PreferencesPage {
-  preferences = {
+  // PREFERÊNCIAS DO USUÁRIO
+  preferences: User['preferences'] = {
     actionMovies: false,
     comedyMovies: false,
     dramaMovies: false,
@@ -22,25 +24,40 @@ export class PreferencesPage {
     sciFiSeries: false,
     newReleases: true,
     recommendations: true,
-    language: 'portuguese'
+    language: 'portuguese',
   };
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private toastcontroller: ToastController) { }
+  constructor(
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private toastcontroller: ToastController
+  ) {}
 
+  // SALVAR PREFERÊNCIAS
   async savePreferences() {
     try {
-      const user = await this.afAuth.currentUser; // USUÁRIO ATUAL
+      const user = await this.afAuth.currentUser;
       if (user) {
         const uid = user.uid;
         await this.afs.collection('users').doc(uid).set({
-          preferences: this.preferences
-        }, { merge: true }); // Usamos "merge: true" para atualizar sem sobrescrever tudo
-        // console.log('Preferências salvas com sucesso:', this.preferences);
+          preferences: this.preferences,
+        }, { merge: true });
+        this.showToast('Preferências salvas com sucesso!', 'success');
       } else {
         console.error('Usuário não autenticado');
       }
     } catch (error) {
-      console.error('Erro ao salvar as preferências:', error); //TRATAR ERRO
+      console.error('Erro ao salvar as preferências:', error);
     }
+  }
+
+  // NOTIFICAÇÃO
+  async showToast(message: string, color: string) {
+    const toast = await this.toastcontroller.create({
+      message,
+      duration: 2000,
+      color,
+    });
+    await toast.present();
   }
 }

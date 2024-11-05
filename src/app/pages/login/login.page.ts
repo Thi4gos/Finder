@@ -25,7 +25,11 @@ export class LoginPage {
   }
 
   loginWithGoogle() {
-    this.authService.loginWithGoogle();
+    this.authService.loginWithGoogle(); 
+  }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook();
   }
 
   async showToast(message: string, color: string) {

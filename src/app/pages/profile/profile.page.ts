@@ -2,37 +2,57 @@ import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
+import { User } from '../../models/interfaces'; // IMPORTA A INTERFACE
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage {
-  constructor(
-    private router: Router, 
-    private profileService: ProfileService,
-    private toastController: ToastController
-  ) { }
-
-  user = {
+  user: User = {
+    // EXEMPLO DE DADOS PARA TESTE
     firstName: 'Thiago',
     lastName: 'Silva',
+    email: 'thiago@exemplo.com',
+    pass: '',
+    tel: 123456789,
     birthDate: '2000-01-01',
     profileImage: null,
     favoriteGenres: ['action', 'comedy'],
     totalReviews: 35,
     averageRating: 4.5,
-    creationDate: '2022-05-12'
+    creationDate: '2022-05-12',
+    twoFactorEnabled: false,
+    preferences: {
+      actionMovies: true,
+      comedyMovies: false,
+      dramaMovies: true,
+      horrorMovies: false,
+      sciFiMovies: true,
+      actionSeries: true,
+      comedySeries: false,
+      dramaSeries: true,
+      horrorSeries: false,
+      sciFiSeries: true,
+      newReleases: true,
+      recommendations: true,
+      language: 'portuguese',
+    },
   };
 
   isEditing = false;
 
-  // Alternar estado de edição
+  constructor(
+    private router: Router,
+    private profileService: ProfileService,
+    private toastController: ToastController
+  ) {}
+
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
 
-  // Função para salvar alterações do perfil
+  // SALVAR PERFIL
   saveProfile() {
     this.profileService.saveUserProfile(this.user).then(() => {
       this.showToast('Perfil atualizado com sucesso!', 'success');
@@ -43,41 +63,14 @@ export class ProfilePage {
     });
   }
 
-  // Função para cancelar edição
-  cancelEdit() {
-    this.isEditing = false;
-  }
-
-  // Função para remover a foto de perfil
-  removeProfilePicture() {
-    this.user.profileImage = null;
-    this.showToast('Foto de perfil removida com sucesso!', 'success');
-  }
-
-  // Função chamada ao selecionar uma nova foto
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.profileService.uploadProfilePicture(file).then(() => {
-      this.showToast('Nova foto de perfil atualizada!', 'success');
-    }).catch((error) => {
-      console.error('Erro ao enviar a foto:', error);
-      this.showToast('Erro ao enviar a foto. Tente novamente!', 'danger');
-    });
-  }
-
-  // Função para exibir notificações
+  // NOTIFICAÇÃO
   async showToast(message: string, color: 'success' | 'danger' | 'warning') {
     const toast = await this.toastController.create({
-      message: message,
+      message,
       duration: 3000,
-      color: color,
-      position: 'bottom'
+      color,
+      position: 'bottom',
     });
     toast.present();
-  }
-
-  // Função para voltar ao feed
-  back() { 
-    this.router.navigate(['feed']);
   }
 }

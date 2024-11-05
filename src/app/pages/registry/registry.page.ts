@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { RegistryService } from 'src/app/services/registry.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service'; 
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from '../../models/interfaces'; // IMPORTA A INTERFACE
 
 @Component({
   selector: 'app-registry',
@@ -10,31 +11,32 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./registry.page.scss'],
 })
 export class RegistryPage {
+  // DADOS DO USUÁRIO
+  user: Partial<User> = {
+    firstName: '',
+    lastName: '',
+    tel: 0,
+    birthDate: '',
+    email: '',
+    pass: '',
+    // OUTROS CAMPOS DEFAULT
+    creationDate: new Date().toISOString(),
+    twoFactorEnabled: false,
+  };
 
-  name: string = '';
-  lastName: string = '';
-  tel: string = '';
-  bdate: string = '';
-  email: string = '';
-  pass: string = '';
+  constructor(
+    private registry: RegistryService,
+    private router: Router,
+    private toastController: ToastController,
+    private authService: AuthService
+  ) {}
 
-  constructor(private registry: RegistryService, private router: Router, private toastController: ToastController, private authService: AuthService) {}
-
+  // REGISTRO DO USUÁRIO
   async onRegister() {
-    const user = {
-      first: this.name,
-      last: this.lastName,
-      born: this.bdate,
-      tel: this.tel,
-      email: this.email,
-      pass: this.pass
-    };
-
-    // Aguarde o resultado da operação de registro
-    const success = await this.registry.addUser(user);
+    const success = await this.registry.addUser(this.user as User); // CAST PARA USER
 
     if (success) {
-      await this.authService.login(user.email, user.pass);
+      await this.authService.login(this.user.email!, this.user.pass!);
       this.showToast('Usuário registrado com sucesso!', 'success');
       this.router.navigate(['/preferences']);
     } else {
@@ -42,11 +44,12 @@ export class RegistryPage {
     }
   }
 
+  // NOTIFICAÇÃO
   async showToast(message: string, color: string) {
     const toast = await this.toastController.create({
-      message: message,
+      message,
       duration: 2000,
-      color: color
+      color,
     });
     await toast.present();
   }

@@ -1,30 +1,41 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="'/home'"></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
+    <ion-title>Recuperação de Senha</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <img src="assets/logo.png" class="app-logo" />  
-    <!-- Campo de entrada para o email do usuário -->
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" required></ion-input> <!-- Entrada para email, obrigatória -->
-    </ion-item>
-    <!-- Botão para enviar o email de recuperação -->
-  <ion-button expand="full" color="primary" (click)="sendResetEmail()">Enviar</ion-button>
-  <ion-item>
-    <ion-button (click)="loginPage()">Login</ion-button>
-    <ion-button (click)="registryPage()">Registry</ion-button>
-    <ion-button (click)="changePassPage()">Mudar senha</ion-button>
-    <a href="preferences">preferences</a>
-    <a href="registry">Registro</a>
-    <a href="change-pass">Mudar senha</a>
+
+<ion-content class="ion-padding">
+  <div class="logo-container">
+    <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Logo Finder" class="app-logo" />
+  </div>
+
+  <ion-item lines="none">
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input
+      [(ngModel)]="email"
+      type="email"
+      required
+      autocomplete="email"
+      inputmode="email"
+      placeholder="Digite seu e-mail"
+      clearInput
+    ></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-button (click)="profilePage()">Profile</ion-button>
-    <ion-button (click)="preferencesPage()">Preferências</ion-button>
-    <ion-button (click)="feedPage()">Feed</ion-button>
-  </ion-item>
+
+  <ion-button expand="full" color="primary" (click)="sendResetEmail()" class="ion-margin-top">
+    Enviar e-mail de recuperação
+  </ion-button>
+
+  <!-- RETORNO DE ENVIO -->
+  <ion-text *ngIf="resetEmailSent" color="success">
+    <p class="ion-padding-top">E-mail de recuperação enviado com sucesso. Verifique sua caixa de entrada.</p>
+  </ion-text>
+
+  <!-- PROMISE ERROR -->
+  <ion-text *ngIf="resetEmailError" color="danger">
+    <p class="ion-padding-top">Erro ao enviar o e-mail. Por favor, tente novamente.</p>
+  </ion-text>
 </ion-content>

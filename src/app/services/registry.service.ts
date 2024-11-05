@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { getAuth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { User } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,12 @@ import { getAuth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 export class RegistryService {
   constructor(private firestore: Firestore) {}
 
-  async addUser(user: { first: string, last: string, born: string, tel: string, email: string, pass: string }): Promise<boolean> {
+  async addUser(user: User): Promise<boolean> {
     try {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, user.email, user.pass);
 
-      const docRef = await addDoc(collection(this.firestore, "Usuarios"), user);
+      await addDoc(collection(this.firestore, "Usuarios"), user); // SALVA O OBJETO COMPLETO
       return true;
     } catch (e) {
       return false;
