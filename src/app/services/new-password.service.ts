@@ -5,34 +5,31 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root'
 })
 export class NewPasswordService {
-
   constructor(private afAuth: AngularFireAuth) { }
 
   // Método para enviar o email de redefinição de senha
-  async sendPasswordResetEmail(email: string): Promise<void> {
+  async sendPasswordResetEmail(email: string): Promise<string> {
     try {
       await this.afAuth.sendPasswordResetEmail(email);
-      console.log("E-mail de recuperação enviado.");
+      return "E-mail de recuperação enviado.";
     } catch (error) {
-      console.error("Erro ao enviar e-mail de recuperação:", error);
-      throw error; // Lançar o erro para tratamento no componente
+      throw "Erro ao enviar e-mail de recuperação: " + error;
     }
   }
 
   // Método para atualizar a senha
-  async changePassword(newPassword: string): Promise<void> {
+  async changePassword(newPassword: string): Promise<string> {
     const user = await this.afAuth.currentUser;
 
     if (user) {
       try {
         await user.updatePassword(newPassword);
-        console.log("Senha atualizada com sucesso.");
+        return "Senha atualizada com sucesso.";
       } catch (error) {
-        console.error("Erro ao atualizar senha:", error);
-        throw error;
+        throw "Erro ao atualizar senha: " + error;
       }
     } else {
-      console.error("Nenhum usuário autenticado.");
+      throw "Nenhum usuário autenticado.";
     }
   }
 }

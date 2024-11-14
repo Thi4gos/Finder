@@ -5,7 +5,7 @@ import { FeedPage } from './feed.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'feed',
     component: FeedPage
   }
 ];

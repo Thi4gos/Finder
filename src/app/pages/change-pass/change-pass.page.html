@@ -8,34 +8,9 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="logo-container">
-    <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Logo Finder" class="app-logo" />
-  </div>
-
-  <ion-item lines="none">
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input
-      [(ngModel)]="email"
-      type="email"
-      required
-      autocomplete="email"
-      inputmode="email"
-      placeholder="Digite seu e-mail"
-      clearInput
-    ></ion-input>
-  </ion-item>
-
-  <ion-button expand="full" color="primary" (click)="sendResetEmail()" class="ion-margin-top">
-    Enviar e-mail de recuperação
-  </ion-button>
-
-  <!-- RETORNO DE ENVIO -->
-  <ion-text *ngIf="resetEmailSent" color="success">
-    <p class="ion-padding-top">E-mail de recuperação enviado com sucesso. Verifique sua caixa de entrada.</p>
-  </ion-text>
-
-  <!-- PROMISE ERROR -->
-  <ion-text *ngIf="resetEmailError" color="danger">
-    <p class="ion-padding-top">Erro ao enviar o e-mail. Por favor, tente novamente.</p>
-  </ion-text>
+  <!-- Exibe o componente de entrada de e-mail até que resetEmailSent seja true -->
+  <app-email-entry *ngIf="!resetEmailSent" (sendEmail)="sendResetEmail()"></app-email-entry>
+  
+  <!-- Exibe o componente de confirmação de senha após o envio do e-mail -->
+  <app-confirm-password *ngIf="resetEmailSent"></app-confirm-password>
 </ion-content>

@@ -63,6 +63,18 @@ export class ProfilePage {
     });
   }
 
+  cancelEdit(){
+
+  }
+
+  removeProfilePicture(){
+
+  }
+
+  onFileSelected(){
+    
+  }
+
   // NOTIFICAÇÃO
   async showToast(message: string, color: 'success' | 'danger' | 'warning') {
     const toast = await this.toastController.create({
