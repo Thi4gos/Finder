@@ -1,56 +1,87 @@
-import { Component } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { RegistryService } from 'src/app/services/registry.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegistryService } from '../../services/registry.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from '../../models/interfaces'; // IMPORTA A INTERFACE
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-registry',
   templateUrl: './registry.page.html',
   styleUrls: ['./registry.page.scss'],
 })
-export class RegistryPage {
-  // DADOS DO USUÁRIO
-  user: Partial<User> = {
-    firstName: '',
-    lastName: '',
-    tel: 0,
-    birthDate: '',
-    email: '',
-    pass: '',
-    // OUTROS CAMPOS DEFAULT
-    creationDate: new Date().toISOString(),
-    twoFactorEnabled: false,
-  };
+export class RegistryPage implements OnInit {
+  registryForm!: FormGroup;
+  isSubmitting = false;
+  showPassword = false;
 
   constructor(
-    private registry: RegistryService,
-    private router: Router,
-    private toastController: ToastController,
-    private authService: AuthService
+    private fb: FormBuilder,
+    private registryService: RegistryService,
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
-  // REGISTRO DO USUÁRIO
-  async onRegister() {
-    const success = await this.registry.addUser(this.user as User); // CAST PARA USER
+  ngOnInit() {
+    this.registryForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        tel: ['', Validators.required],
+        birthDate: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        pass: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPass: ['', Validators.required],
+        termsAccepted: [false, Validators.requiredTrue],
+      },
+      { validators: this.passwordMatchValidator }
+    );
+  }
 
-    if (success) {
-      await this.authService.login(this.user.email!, this.user.pass!);
-      this.showToast('Usuário registrado com sucesso!', 'success');
-      this.router.navigate(['/preferences']);
-    } else {
-      this.showToast('Erro ao registrar usuário!', 'danger');
+  passwordMatchValidator(group: FormGroup) {
+    const pass = group.get('pass')?.value;
+    const confirmPass = group.get('confirmPass')?.value;
+    return pass === confirmPass ? null : { passwordMismatch: true };
+  }
+
+  async onRegister() {
+    if (this.registryForm.invalid) return;
+
+    this.isSubmitting = true;
+    const userData = this.registryForm.value;
+
+    try {
+      await this.registryService.registerUser({
+        ...userData,
+        pass: userData.pass,
+      });
+      await this.toastService.showToast('Usuário registrado com sucesso!', 'success');
+      this.registryForm.reset();
+      this.router.navigate(['/preferences'], {
+        state: { email: userData.email }, // Passa dados via rota
+      });
+    } catch (error) {
+      await this.toastService.showToast(`Erro ao registrar: ${error}`, 'danger');
+    } finally {
+      this.isSubmitting = false;
     }
   }
 
-  // NOTIFICAÇÃO
-  async showToast(message: string, color: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      color,
-    });
-    await toast.present();
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.registryForm.get(controlName);
+    return control?.touched && control?.invalid || false;
+  }
+
+  isValid(controlName: string): boolean {
+    const control = this.registryForm.get(controlName);
+    return control?.touched && control?.valid || false;
+  }
+
+  isTouchedAndInvalid(controlName: string, errorKey: string): boolean {
+    const control = this.registryForm.get(controlName);
+    return control?.touched && control?.hasError(errorKey) || false;
   }
 }

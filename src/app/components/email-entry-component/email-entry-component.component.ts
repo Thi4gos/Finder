@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-email-entry',
@@ -11,8 +11,21 @@ export class EmailEntryComponent {
 
   @Output() sendEmail = new EventEmitter<string>();
 
-  // Emite o evento para o componente pai com o e-mail
-  onSendEmail() {
+  constructor(private toastController: ToastService) {}
+
+  // Emite o evento para o componente pai com validação de e-mail
+  async onSendEmail() {
+    if (!this.email || !this.isValidEmail(this.email)) {
+      this.toastController.showToast('Por favor, insira um e-mail válido.', "danger");
+      return;
+    }
+
     this.sendEmail.emit(this.email);
+    this.toastController.showToast('E-mail enviado com sucesso!', "sucess");
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastService } from 'src/app/services/toast.service';
 import { TmdbService } from 'src/app/services/tmdb.service';
 @Component({
   selector: 'app-feed',
@@ -20,7 +20,7 @@ export class FeedPage implements OnInit {
   constructor(
     private router: Router,
     private tmdbService: TmdbService,
-    private toastcontroller: ToastController
+    private toastcontroller: ToastService
   ) { }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class FeedPage implements OnInit {
         this.movies = data.results;
         this.isLoading = false;
         this.loadWatchProviders();
-        this.loadAdditionalMovieDetails();
+        // this.loadAdditionalMovieDetails();
       },
       error:(error) => {
         console.error('Erro ao buscar filmes populares: ', error); //TRATAR ERRO
@@ -79,7 +79,7 @@ export class FeedPage implements OnInit {
           this.movies = data.results;
           this.isLoading = false;
           this.loadWatchProviders();
-          this.loadAdditionalMovieDetails();
+          // this.loadAdditionalMovieDetails();
         },
         error: (error) => {
           console.error('Erro ao buscar filmes por gênero: ', error); //TRATAR ERRO
@@ -109,26 +109,26 @@ export class FeedPage implements OnInit {
     });
   }
 
-  loadAdditionalMovieDetails() {
-    this.movies.forEach(movie => {
-      const movieId = movie.id;
-      this.tmdbService.getMovieDetails(movieId).subscribe(
-        { next:(details) => {
-          this.additionalDetails[movieId] = {
-            genres: details.genres.map((genre: any) => genre.name),
-            duration: details.runtime,
-            budget: details.budget,
-            revenue: details.revenue,
-            certification: details.release_dates.results.find((release: any) => release.iso_3166_1 === 'BR')?.release_dates[0]?.certification || 'N/A'
-          };
-        },
-        error: (error) => {
-          console.error('Erro ao buscar detalhes adicionais: ', error); //TRATAR ERRO
-        }
-      }
-      );
-    });
-  }
+  // loadAdditionalMovieDetails() {
+  //   this.movies.forEach(movie => {
+  //     const movieId = movie.id;
+  //     this.tmdbService.getMovieDetails(movieId).subscribe(
+  //       { next:(details) => {
+  //         this.additionalDetails[movieId] = {
+  //           genres: details.genres.map((genre: any) => genre.name),
+  //           duration: details.runtime,
+  //           budget: details.budget,
+  //           revenue: details.revenue,
+  //           certification: details.release_dates.results.find((release: any) => release.iso_3166_1 === 'BR')?.release_dates[0]?.certification || 'N/A'
+  //         };
+  //       },
+  //       error: (error) => {
+  //         console.error('Erro ao buscar detalhes adicionais: ', error); //TRATAR ERRO
+  //       }
+  //     }
+  //     );
+  //   });
+  // }
 
   // BARRA DE PESQUISA
   searchMovies() {
@@ -141,7 +141,7 @@ export class FeedPage implements OnInit {
           this.movies = data.results;
           this.isLoading = false;
           this.loadWatchProviders();
-          this.loadAdditionalMovieDetails();
+          // this.loadAdditionalMovieDetails();
         },
         error:(error) => {
           console.error('Erro ao buscar filmes: ', error); //TRATAR ERRO

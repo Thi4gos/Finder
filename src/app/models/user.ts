@@ -3,15 +3,15 @@ export interface User {
     lastName: string
     email: string
     pass: string
-    tel: number
+    tel: string
     birthDate: string
-    profileImage: null
-    favoriteGenres: string[]
-    totalReviews: number
-    averageRating: number
-    creationDate: string
+    profileImage?: null
+    favoriteGenres?: string[]
+    totalReviews?: number
+    averageRating?: number
+    creationDate?: string
     twoFactorEnabled: boolean
-    preferences: {
+    preferences?: {
         actionMovies: boolean,
         comedyMovies: boolean,
         dramaMovies: boolean,

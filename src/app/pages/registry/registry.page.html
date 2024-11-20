@@ -1,60 +1,95 @@
-<ion-content class="ion-padding custom">
-  <!-- Imagem no topo -->
-  <div class="ion-text-center">
-    <img src="../../../assets/img/logoTypes/PNG/Finder-removebg-preview.png" alt="Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
+<ion-content class="ion-padding">
+  <div class="logo-container">
+    <img src="assets/img/logoTypes/PNG/Finder-removebg-preview.png" 
+         alt="Logo" 
+         class="logo-img">
   </div>
 
-  <form (ngSubmit)="onRegister()"> <!-- LÓGICA -->
-    <ion-grid>
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="12" size-md="6">
-          <!-- TENTEM COLOCAR O GRADIENT NO FUNDO-->
-          <!-- Input Nome -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Nome" type="text" [(ngModel)]="user.firstName" [ngModelOptions]={standalone:true} placeholder="Digite seu primeiro nome" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Sobrenome" type="text" [(ngModel)]="user.lastName" [ngModelOptions]={standalone:true} placeholder="Digite seu sobrenome" required></ion-input>
-          </ion-item>
-          <!-- Input Telefone (Opcional) -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Telefone(opcional)" type="tel" [(ngModel)]="user.tel" [ngModelOptions]={standalone:true} placeholder="Digite seu telefone"></ion-input>
-          </ion-item>
+  <form [formGroup]="registryForm" (ngSubmit)="onRegister()">
+    <!-- Campo de Nome -->
+    <ion-item [class.invalid]="isInvalid('firstName')">
+      <ion-input formControlName="firstName" type="text" label="Nome" labelPlacement="floating"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="isValid('firstName')"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('firstName', 'required')">
+        Nome é obrigatório
+      </ion-note>
+    </ion-item>
 
-          <ion-item>
-            <ion-input labelPlacement="stacked" label="Data de nascimento" type="date" [(ngModel)]="user.birthDate" [ngModelOptions]={standalone:true} required></ion-input>
-          </ion-item>
-          <!-- Input Email -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Email" type="email" [(ngModel)]="user.email" [ngModelOptions]={standalone:true} placeholder="Digite seu email" required></ion-input>
-          </ion-item>
+    <!-- Campo de Sobrenome -->
+    <ion-item [class.invalid]="isInvalid('lastName')">
+      <ion-input formControlName="lastName" type="text" label="Sobrenome" labelPlacement="floating"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="isValid('lastName')"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('lastName', 'required')">
+        Sobrenome é obrigatório
+      </ion-note>
+    </ion-item>
 
-          <!-- Input Senha -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Senha" type="password" [(ngModel)]="user.pass" [ngModelOptions]={standalone:true} placeholder="Digite sua senha" required></ion-input>
-          </ion-item>
+    <!-- Campo de Telefone -->
+    <ion-item [class.invalid]="isInvalid('tel')">
+      <ion-input formControlName="tel" type="tel" label="Telefone" labelPlacement="floating"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="isValid('tel')"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('tel', 'required')">
+        Telefone é obrigatório
+      </ion-note>
+    </ion-item>
 
-          <!-- Input Confirmar Senha -->
-          <ion-item>
-            <ion-input labelPlacement="floating" label="Confirmar senha" type="password" placeholder="Digite novamente sua senha" required></ion-input>
-          </ion-item>      
-          <!-- Botão de Registro -->
-          <div class="buttonRg">
-            <ion-button expand="fit" shape="round" type="submit">
-              registrar
-            </ion-button>
-            <!-- Pergunta sobre login -->
-            <p style="margin-top: 15px;" class="ion-text-center">
-              Já tem uma conta? <a href="/login">Faça login</a>
-            </p>
-          </div>
-          <!-- Checkbox para aceitar termos -->
-          <div class="CheckBox">     
-            <ion-checkbox slot="start"></ion-checkbox>
-            <ion-label>Eu aceito os <a href="#">termos de uso</a></ion-label> 
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <!-- Campo de Data de Nascimento -->
+    <ion-item [class.invalid]="isInvalid('birthDate')">
+      <ion-input formControlName="birthDate" type="date" label="Data de Nascimento" labelPlacement="floating"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="isValid('birthDate')"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('birthDate', 'required')">
+        Data de nascimento é obrigatória
+      </ion-note>
+    </ion-item>
+
+    <!-- Campo de Email -->
+    <ion-item [class.invalid]="isInvalid('email')">
+      <ion-input formControlName="email" type="email" label="Email" labelPlacement="floating"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="isValid('email')"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('email', 'required')">
+        Email é obrigatório
+      </ion-note>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('email', 'email')">
+        Email inválido
+      </ion-note>
+    </ion-item>
+
+    <!-- Campo de Senha -->
+    <ion-item [class.invalid]="isInvalid('pass')">
+      <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="pass" label="Senha" labelPlacement="floating"></ion-input>
+      <ion-icon slot="end" [name]="showPassword ? 'eye-off' : 'eye'" (click)="toggleShowPassword()"></ion-icon>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('pass', 'required')">
+        Senha é obrigatória
+      </ion-note>
+      <ion-note slot="error" *ngIf="isTouchedAndInvalid('pass', 'minlength')">
+        Senha deve ter no mínimo 6 caracteres
+      </ion-note>
+    </ion-item>
+
+    <!-- Campo de Confirmar Senha -->
+    <ion-item [class.invalid]="isInvalid('confirmPass')">
+      <ion-input formControlName="confirmPass" type="password" label="Confirmar Senha" labelPlacement="floating"></ion-input>
+      <ion-note slot="error" *ngIf="registryForm.errors?.['passwordMismatch']">
+        Senhas não conferem
+      </ion-note>
+    </ion-item>
+
+    <!-- Termos de Uso -->
+    <ion-item>
+      <ion-checkbox formControlName="termsAccepted"></ion-checkbox>
+      <ion-label class="ion-padding-start">
+        Eu aceito os <a href="/terms">termos de uso</a>
+      </ion-label>
+    </ion-item>
+
+    <!-- Botão de Registro -->
+    <ion-button expand="block" type="submit" [disabled]="!registryForm.valid || isSubmitting">
+      {{ isSubmitting ? 'Registrando...' : 'Registrar' }}
+    </ion-button>
+
+    <!-- Link para Login -->
+    <div class="login-link">
+      Já tem uma conta? <a routerLink="/login">Faça login</a>
+    </div>
   </form>
 </ion-content>

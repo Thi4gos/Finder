@@ -1,63 +1,52 @@
-import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ToastController } from '@ionic/angular';
-import { User } from '../../models/interfaces'; // IMPORTA A INTERFACE
+import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'src/app/services/toast.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
   styleUrls: ['./preferences.page.scss'],
 })
-export class PreferencesPage {
-  // PREFERÊNCIAS DO USUÁRIO
-  preferences: User['preferences'] = {
-    actionMovies: false,
-    comedyMovies: false,
-    dramaMovies: false,
-    horrorMovies: false,
-    sciFiMovies: false,
-    actionSeries: false,
-    comedySeries: false,
-    dramaSeries: false,
-    horrorSeries: false,
-    sciFiSeries: false,
-    newReleases: true,
-    recommendations: true,
-    language: 'portuguese',
+export class PreferencesPage implements OnInit {
+  userPreferences = {
+    genres: [],
+    notifications: false,
   };
 
-  constructor(
-    private afs: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private toastcontroller: ToastController
-  ) {}
+  genres = [
+    { id: 28, name: 'Ação' },
+    { id: 12, name: 'Aventura' },
+    { id: 16, name: 'Animação' },
+    { id: 35, name: 'Comédia' },
+    { id: 80, name: 'Crime' },
+    { id: 99, name: 'Documentário' },
+    { id: 18, name: 'Drama' },
+    { id: 10751, name: 'Família' },
+    { id: 14, name: 'Fantasia' },
+    { id: 36, name: 'História' },
+    { id: 27, name: 'Terror' },
+    { id: 10402, name: 'Música' },
+    { id: 9648, name: 'Mistério' },
+    { id: 10749, name: 'Romance' },
+    { id: 878, name: 'Ficção Científica' },
+    { id: 10770, name: 'Filme de TV' },
+    { id: 53, name: 'Thriller' },
+    { id: 10752, name: 'Guerra' },
+    { id: 37, name: 'Faroeste' },
+  ];
 
-  // SALVAR PREFERÊNCIAS
-  async savePreferences() {
-    try {
-      const user = await this.afAuth.currentUser;
-      if (user) {
-        const uid = user.uid;
-        await this.afs.collection('users').doc(uid).set({
-          preferences: this.preferences,
-        }, { merge: true });
-        this.showToast('Preferências salvas com sucesso!', 'success');
-      } else {
-        console.error('Usuário não autenticado');
-      }
-    } catch (error) {
-      console.error('Erro ao salvar as preferências:', error);
-    }
+  email!: string; // Email recebido do registro
+
+  constructor(private router: Router, private toastservice: ToastService) {}
+
+  ngOnInit() {
+    // Recupera o email do estado da rota
+    const navigation = this.router.getCurrentNavigation();
+    this.email = navigation?.extras.state?.['email'] || '';
   }
 
-  // NOTIFICAÇÃO
-  async showToast(message: string, color: string) {
-    const toast = await this.toastcontroller.create({
-      message,
-      duration: 2000,
-      color,
-    });
-    await toast.present();
+  savePreferences() {
+    this.toastservice.showToast("Prefências salvas!", "success");
+    console.log('Preferências salvas:', this.userPreferences, 'Email:', this.email);
   }
 }
